@@ -1,5 +1,6 @@
 package com.koposovo.animeTest.controllers;
 
+import com.koposovo.animeTest.api.UserController;
 import com.koposovo.animeTest.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,13 +15,6 @@ import java.util.ResourceBundle;
 
 @Controller
 public class SignUpController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
     @FXML
     private TextField login_field;
 
@@ -37,7 +31,7 @@ public class SignUpController {
     private TextField signUpLastName;
 
     @FXML
-    private TextField signUpCity;
+    private TextField group_field;
 
     @FXML
     private CheckBox signUpCheckBoxMale;
@@ -53,18 +47,24 @@ public class SignUpController {
     }
 
     private void signUpNewUser() {
-        //DataBaseHandler dbHandler = new DataBaseHandler();
+        UserController userController = new UserController();
         String firstName= signUpName.getText();
         String lastName= signUpLastName.getText();
         String userName= login_field.getText();
         String password= password_field.getText();
-        String location= signUpCity.getText();
-        String gender= "";
+        String group= group_field.getText();
+        String gender;
         if(signUpCheckBoxMale.isSelected())
             gender="Мужской";
         else
             gender="Женский";
-        User user = new User(firstName, lastName, userName, password, gender, location );
-        //dbHandler.signUpUser(user);
+
+        User user = new User(userName, password);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setGroup(group);
+        user.setGender(gender);
+
+        userController.save(user);
     }
 }

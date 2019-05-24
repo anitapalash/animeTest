@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.koposovo.animeTest.SpringStageLoader;
+import com.koposovo.animeTest.user.Admin;
+import com.koposovo.animeTest.user.Analiser;
 import com.koposovo.animeTest.user.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,12 +53,19 @@ public class EntranceController {
             }
         });
         loginSignUpButton.setOnAction(event -> {
-            openNewScene("../view/signUp.fxml");
+            try {
+                SpringStageLoader.loadScene("signUp");
+            } catch (IOException e) {
+                System.out.println("Could not open SignUp scene");
+            }
         });
 
     }
 
     private void loginUser(String loginText, String loginPassword) {
+        //найти юзера в бд по логину
+        //проверить верный ли пароль
+        //каким-то образом зафиксировать какой юзер залогинился
         user.setUserName(loginText);
         user.setPassword(loginPassword);
         int counter = 0;
@@ -63,28 +73,22 @@ public class EntranceController {
         if (counter >= 1) {
             //переход к личному кабинету и тестам
             //сделать в зависимости от режима доступа юзера(админ, аналитик или обычный юзер)
-            openNewScene("../view/AdminView.fxml");
+            try {
+                if (user instanceof Admin)
+                    SpringStageLoader.loadScene("AdminView");
+                else if (user instanceof Analiser)
+                    SpringStageLoader.loadScene("AnaliserInterface");
+                else
+                    SpringStageLoader.loadScene("UserView");
+            } catch (IOException e) {
+                System.out.println("Could not open scene after logging in");
+            }
         } else {
             Shake userLoginAnim = new Shake(login_field);
             Shake userPassAnim = new Shake(password_field);
             userLoginAnim.playAnim();
             userPassAnim.playAnim();
         }
-    }
-
-    public void openNewScene(String window) {
-        loginSignUpButton.getScene().getWindow().hide();
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(window));
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
     }
 }
 

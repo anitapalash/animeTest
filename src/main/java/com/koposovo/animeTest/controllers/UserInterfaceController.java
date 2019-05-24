@@ -1,5 +1,6 @@
 package com.koposovo.animeTest.controllers;
 
+import com.koposovo.animeTest.user.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
@@ -9,6 +10,11 @@ import java.awt.*;
 
 @Controller
 public class UserInterfaceController {
+    private User currentUser;
+
+    public UserInterfaceController() {
+        //определить какой юзер сейчас залогинен и в статическом блоке заполнить поля его данными
+    }
     @FXML
     protected Tab personalInfo;
 
@@ -41,6 +47,7 @@ public class UserInterfaceController {
 
     static {
         //заполнение полей персональных данных данными текущего пользователя
+
     }
 
     @FXML

@@ -33,7 +33,9 @@ public class User {
     private String gender;      //пол
 
 
-    public User() { }
+    public User() { this.access = Access.USER; }
+
+    public User(String userName, String password) { this.access = Access.USER; }
 
     public User(String firstName, String userName, String password, String lastName, String group, String gender) {
         this.firstName = firstName;
