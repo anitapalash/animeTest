@@ -73,6 +73,7 @@ public class EntranceController {
         if (counter >= 1) {
             //переход к личному кабинету и тестам
             //сделать в зависимости от режима доступа юзера(админ, аналитик или обычный юзер)
+            //test comment
             try {
                 if (user instanceof Admin)
                     SpringStageLoader.loadScene("AdminView");
