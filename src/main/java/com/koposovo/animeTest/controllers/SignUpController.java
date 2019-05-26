@@ -1,6 +1,6 @@
 package com.koposovo.animeTest.controllers;
 
-import com.koposovo.animeTest.api.UserController;
+import com.koposovo.animeTest.api.UserRepository;
 import com.koposovo.animeTest.user.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,12 +9,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.springframework.stereotype.Controller;
 
-
-import java.net.URL;
-import java.util.ResourceBundle;
-
 @Controller
-public class SignUpController {
+public class
+
+
+SignUpController {
     @FXML
     private TextField login_field;
 
@@ -47,7 +46,7 @@ public class SignUpController {
     }
 
     private void signUpNewUser() {
-        UserController userController = new UserController();
+        UserRepository userRepository = new UserRepository();
         String firstName= signUpName.getText();
         String lastName= signUpLastName.getText();
         String userName= login_field.getText();
@@ -65,6 +64,6 @@ public class SignUpController {
         user.setGroup(group);
         user.setGender(gender);
 
-        userController.save(user);
+        userRepository.save(user);
     }
 }

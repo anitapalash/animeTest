@@ -8,6 +8,7 @@ import com.koposovo.animeTest.SpringStageLoader;
 import com.koposovo.animeTest.user.Admin;
 import com.koposovo.animeTest.user.Analiser;
 import com.koposovo.animeTest.user.User;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,12 +16,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class EntranceController {
     protected static User user = new User();
+
 
     @FXML
     private ResourceBundle resources;
@@ -41,8 +44,9 @@ public class EntranceController {
     private Button loginSignUpButton;
 
     @FXML
-    void initialize() {
-        authSignButton.setOnAction(event -> {
+    void logIn(ActionEvent event) {
+
+        authSignButton.setOnAction(event1 -> {
             String loginText = login_field.getText().trim();
             String loginPassword = password_field.getText().trim();
 
@@ -52,13 +56,24 @@ public class EntranceController {
                 System.out.println("Login and Password is Empty");
             }
         });
-        loginSignUpButton.setOnAction(event -> {
-            try {
-                SpringStageLoader.loadScene("signUp");
-            } catch (IOException e) {
-                System.out.println("Could not open SignUp scene");
-            }
-        });
+    }
+
+
+    @FXML
+    void signUp(ActionEvent event) {
+
+        openNewScene("view/signUp.fxml");
+    }
+
+
+
+
+    @FXML
+    void initialize() {
+
+        authSignButton.setOnAction(event ->logIn(event));
+        loginSignUpButton.setOnAction(event ->signUp(event));
+
 
     }
 
@@ -90,6 +105,20 @@ public class EntranceController {
             userLoginAnim.playAnim();
             userPassAnim.playAnim();
         }
+    }
+
+    public void openNewScene(String window) {
+        loginSignUpButton.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(window));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
     }
 }
 
