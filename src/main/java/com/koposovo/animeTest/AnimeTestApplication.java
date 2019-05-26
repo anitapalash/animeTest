@@ -5,6 +5,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
+
+import javafx.scene.*;
+import org.springframework.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -24,7 +27,9 @@ public class AnimeTestApplication extends Application {
 	@Override
 	public void init() throws Exception {
 		springContext = SpringApplication.run(AnimeTestApplication.class);
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view/LogIn.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view/logIn.fxml"));
+		//SpringFXMLoader.load("view/logIn.fxml");
+		//Scene scene = new Scene((Parent) controller.getView(), 300, 275);
 		fxmlLoader.setControllerFactory(springContext::getBean);
 	}
 

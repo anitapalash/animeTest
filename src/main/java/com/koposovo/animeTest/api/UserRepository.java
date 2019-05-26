@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class UserController {
+public class UserRepository {
     @Autowired
     private iJpa repo;
 
