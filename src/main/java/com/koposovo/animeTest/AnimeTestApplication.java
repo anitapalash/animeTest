@@ -6,16 +6,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 
-import javafx.scene.*;
-import org.springframework.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 @SpringBootApplication
 @ComponentScan
+//@EntityScan("com.koposovo.animeTest.model")
+@EnableJpaRepositories
+
 public class AnimeTestApplication extends Application {
 	private ConfigurableApplicationContext springContext;
 	private Parent rootNode;

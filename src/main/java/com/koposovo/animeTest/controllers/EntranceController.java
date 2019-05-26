@@ -5,19 +5,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.koposovo.animeTest.SpringStageLoader;
-import com.koposovo.animeTest.user.Admin;
-import com.koposovo.animeTest.user.Analiser;
-import com.koposovo.animeTest.user.User;
-import javafx.event.EventHandler;
+import com.koposovo.animeTest.model.Admin;
+import com.koposovo.animeTest.model.Analiser;
+import com.koposovo.animeTest.model.User;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 import org.springframework.stereotype.Controller;
 
 @Controller

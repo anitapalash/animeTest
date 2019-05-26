@@ -1,6 +1,6 @@
 package com.koposovo.animeTest.controllers;
 
-import com.koposovo.animeTest.user.User;
+import com.koposovo.animeTest.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;

@@ -1,7 +1,7 @@
 package com.koposovo.animeTest.controllers;
 
-import com.koposovo.animeTest.api.UserRepository;
-import com.koposovo.animeTest.user.User;
+import com.koposovo.animeTest.Service.Concrete.UserService;
+import com.koposovo.animeTest.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -46,7 +46,7 @@ SignUpController {
     }
 
     private void signUpNewUser() {
-        UserRepository userRepository = new UserRepository();
+        UserService userService = new UserService();
         String firstName= signUpName.getText();
         String lastName= signUpLastName.getText();
         String userName= login_field.getText();
@@ -64,6 +64,6 @@ SignUpController {
         user.setGroup(group);
         user.setGender(gender);
 
-        userRepository.save(user);
+        userService.createUser(user);
     }
 }

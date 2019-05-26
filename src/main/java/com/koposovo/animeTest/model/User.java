@@ -1,4 +1,4 @@
-package com.koposovo.animeTest.user;
+package com.koposovo.animeTest.model;
 
 import com.koposovo.animeTest.api.Access;
 
@@ -35,7 +35,10 @@ public class User {
 
     public User() { this.access = Access.USER; }
 
-    public User(String userName, String password) { this.access = Access.USER; }
+    public User(String userName, String password)
+    {   this.userName = userName;
+        this.password = password;
+        this.access = Access.USER; }
 
     public User(String firstName, String userName, String password, String lastName, String group, String gender) {
         this.firstName = firstName;
