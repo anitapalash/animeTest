@@ -23,8 +23,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class EntranceController {
     protected static User user = new User();
-
-
     @FXML
     private ResourceBundle resources;
 
@@ -45,36 +43,32 @@ public class EntranceController {
 
     @FXML
     void logIn(ActionEvent event) {
+        String loginText = login_field.getText().trim();
+        String loginPassword = password_field.getText().trim();
 
-        authSignButton.setOnAction(event1 -> {
-            String loginText = login_field.getText().trim();
-            String loginPassword = password_field.getText().trim();
-
-            if (!loginText.equals("") && !loginPassword.equals("")) {
-                loginUser(loginText, loginPassword);
-            } else {
-                System.out.println("Login and Password is Empty");
-            }
-        });
+        if (!loginText.equals("") && !loginPassword.equals("")) {
+            loginUser(loginText, loginPassword);
+        } else {
+            System.out.println("Login and Password is Empty");
+        }
     }
-
 
     @FXML
     void signUp(ActionEvent event) {
-
-        openNewScene("view/signUp.fxml");
+        //openNewScene("view/signUp.fxml");
+        try {
+            Stage stage = new Stage();
+            stage.setScene(SpringStageLoader.loadScene("signUp"));
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Failed to open signUp Scene");
+        }
     }
-
-
-
 
     @FXML
     void initialize() {
-
         authSignButton.setOnAction(event ->logIn(event));
         loginSignUpButton.setOnAction(event ->signUp(event));
-
-
     }
 
     private void loginUser(String loginText, String loginPassword) {
