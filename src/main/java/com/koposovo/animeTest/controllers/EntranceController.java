@@ -55,11 +55,8 @@ public class EntranceController {
 
     @FXML
     void signUp(ActionEvent event) {
-        //openNewScene("view/signUp.fxml");
         try {
-            Stage stage = new Stage();
-            stage.setScene(SpringStageLoader.loadScene("signUp"));
-            stage.show();
+            SpringStageLoader.loadScene("signUp").showAndWait();
         } catch (IOException e) {
             System.out.println("Failed to open signUp Scene");
         }
@@ -101,6 +98,8 @@ public class EntranceController {
         }
     }
 
+    //по идее больше не нужен
+    /*
     public void openNewScene(String window) {
         loginSignUpButton.getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(window));
@@ -114,5 +113,6 @@ public class EntranceController {
         stage.setScene(new Scene(root));
         stage.showAndWait();
     }
+    */
 }
 

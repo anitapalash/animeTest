@@ -51,8 +51,10 @@ public class SpringStageLoader implements ApplicationContextAware {
         return stage;
     }
 
-    public static Scene loadScene(String fxmlName) throws IOException {
-        return new Scene(load(fxmlName));
+    public static Stage loadScene(String fxmlName) throws IOException {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(load(fxmlName)));
+        return stage;
     }
 
     /**
