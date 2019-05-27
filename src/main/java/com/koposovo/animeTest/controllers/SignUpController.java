@@ -1,6 +1,6 @@
 package com.koposovo.animeTest.controllers;
 
-import com.koposovo.animeTest.Service.Concrete.UserService;
+import com.koposovo.animeTest.Service.UserService;
 import com.koposovo.animeTest.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

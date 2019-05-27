@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.koposovo.animeTest.Service.UserService;
 import com.koposovo.animeTest.SpringStageLoader;
-import com.koposovo.animeTest.model.Admin;
-import com.koposovo.animeTest.model.Analiser;
+import com.koposovo.animeTest.api.Access;
 import com.koposovo.animeTest.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -64,26 +64,32 @@ public class EntranceController {
     }
 
     private void loginUser(String loginText, String loginPassword) {
-        //найти юзера в бд по логину
-        //проверить верный ли пароль
         //каким-то образом зафиксировать какой юзер залогинился
         user.setUserName(loginText);
         user.setPassword(loginPassword);
         int counter = 0;
 
         if (counter >= 1) {
-            //переход к личному кабинету и тестам
-            //сделать в зависимости от режима доступа юзера(админ, аналитик или обычный юзер)
-            //test comment
-            try {
-                if (user instanceof Admin)
-                    SpringStageLoader.loadScene("AdminView");
-                else if (user instanceof Analiser)
-                    SpringStageLoader.loadScene("AnaliserInterface");
-                else
-                    SpringStageLoader.loadScene("UserView");
-            } catch (IOException e) {
-                System.out.println("Could not open scene after logging in");
+            UserService userService = new UserService();
+            Long i = 0L;
+            while (true) {
+                User tempUser = userService.getUser(i);
+                if (tempUser.getUserName().equals(user.getUserName())) {
+                    if (tempUser.getPassword().equals(user.getPassword())) {
+                        System.out.println("Log in successful");
+                        loadEnter();
+                        break;
+                    }
+                    else
+                        System.out.println("Wrong password");
+                } else {
+                    if (!tempUser.getUserName().equals(null))
+                        i++;
+                    else {
+                        System.out.println("No such user in database");
+                        break;
+                    }
+                }
             }
         } else {
             Shake userLoginAnim = new Shake(login_field);
@@ -93,21 +99,17 @@ public class EntranceController {
         }
     }
 
-    //по идее больше не нужен
-    /*
-    public void openNewScene(String window) {
-        loginSignUpButton.getScene().getWindow().hide();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(window));
+    private void loadEnter() {
         try {
-            loader.load();
+            if (user.getAccess() == Access.ADMIN)
+                SpringStageLoader.loadScene("AdminView");
+            else if (user.getAccess() == Access.ANALISER)
+                SpringStageLoader.loadScene("AnaliserInterface");
+            else
+                SpringStageLoader.loadScene("UserView");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Failed to load scene");
         }
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
     }
-    */
 }
 
