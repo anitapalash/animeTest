@@ -47,6 +47,7 @@ SignUpController {
 
     private void signUpNewUser() {
         UserService userService = new UserService();
+
         String firstName= signUpName.getText();
         String lastName= signUpLastName.getText();
         String userName= login_field.getText();
