@@ -12,13 +12,13 @@ public class User {
     private Long id;
 
     @Column
-    private String firstName;        //имя
-
-    @Column
     private String userName;       //логин
 
     @Column
     private String password;    //пароль
+
+    @Column
+    private String firstName;        //имя
 
     @Column
     private String lastName;     //фамилия
