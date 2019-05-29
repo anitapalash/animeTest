@@ -10,11 +10,8 @@ import java.awt.*;
 
 @Controller
 public class UserInterfaceController {
-    private User currentUser;
+    private static User currentUser;
 
-    public UserInterfaceController() {
-        //определить какой юзер сейчас залогинен и в статическом блоке заполнить поля его данными
-    }
     @FXML
     protected Tab personalInfo;
 
@@ -45,9 +42,13 @@ public class UserInterfaceController {
     @FXML
     protected TextField genderTextField;
 
-    static {
+    public UserInterfaceController() {
         //заполнение полей персональных данных данными текущего пользователя
-
+        userNameTextField.setText(currentUser.getUserName());
+        firstNameTextField.setText(currentUser.getFirstName());
+        surnameTextField.setText(currentUser.getLastName());
+        groupTextField.setText(currentUser.getGroup());
+        genderTextField.setText(currentUser.getGender());
     }
 
     @FXML
@@ -63,5 +64,9 @@ public class UserInterfaceController {
     @FXML
     void exit(ActionEvent event) {
 
+    }
+
+    public static void setCurrentUser(User user) {
+        currentUser = user;
     }
 }

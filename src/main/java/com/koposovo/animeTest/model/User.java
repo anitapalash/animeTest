@@ -11,27 +11,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
-    private String userName;       //логин
-
-    @Column
-    private String password;    //пароль
-
-    @Column
-    private String firstName;        //имя
-
-    @Column
+    private String userName;      //логин
+    private String password;      //пароль
+    private String firstName;     //имя
     private String lastName;     //фамилия
-
-    @Column
     private String group;       //группа
-
-    @Column
     private Access access;      //уровень доступа
-
-    @Column
     private String gender;      //пол
-
 
     public User() { this.access = Access.USER; }
 

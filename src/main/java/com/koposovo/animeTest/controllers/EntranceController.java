@@ -64,49 +64,48 @@ public class EntranceController {
     }
 
     private void loginUser(String loginText, String loginPassword) {
-        //каким-то образом зафиксировать какой юзер залогинился
         user.setUserName(loginText);
         user.setPassword(loginPassword);
-        int counter = 0;
 
-        if (counter >= 1) {
-            UserService userService = new UserService();
-            Long i = 0L;
-            while (true) {
-                User tempUser = userService.getUser(i);
-                if (tempUser.getUserName().equals(user.getUserName())) {
-                    if (tempUser.getPassword().equals(user.getPassword())) {
-                        System.out.println("Log in successful");
-                        loadEnter();
-                        break;
-                    }
-                    else
-                        System.out.println("Wrong password");
+        UserService userService = new UserService();
+        Long i = 1L;
+        while (true) {
+            User tempUser = userService.getUser(i);
+            if (tempUser.getUserName().equals(user.getUserName())) {
+                if (tempUser.getPassword().equals(user.getPassword())) {
+                    System.out.println("Log in successful");
+                    loadEnter();
+                    break;
                 } else {
-                    if (!tempUser.getUserName().equals(null))
-                        i++;
-                    else {
-                        System.out.println("No such user in database");
-                        break;
-                    }
+                    System.out.println("Wrong password");
+                    Shake userLoginAnim = new Shake(login_field);
+                    Shake userPassAnim = new Shake(password_field);
+                    userLoginAnim.playAnim();
+                    userPassAnim.playAnim();
+                }
+            } else {
+                if (!tempUser.getUserName().equals(null))
+                    i++;
+                else {
+                    System.out.println("No such user in database");
+                    break;
                 }
             }
-        } else {
-            Shake userLoginAnim = new Shake(login_field);
-            Shake userPassAnim = new Shake(password_field);
-            userLoginAnim.playAnim();
-            userPassAnim.playAnim();
         }
     }
 
+
     private void loadEnter() {
         try {
-            if (user.getAccess() == Access.ADMIN)
+            UserInterfaceController.setCurrentUser(user);
+
+            if (user.getAccess() == Access.ADMIN) {
                 SpringStageLoader.loadScene("AdminView");
-            else if (user.getAccess() == Access.ANALISER)
+            } else if (user.getAccess() == Access.ANALISER) {
                 SpringStageLoader.loadScene("AnaliserInterface");
-            else
+            } else {
                 SpringStageLoader.loadScene("UserView");
+            }
         } catch (IOException e) {
             System.out.println("Failed to load scene");
         }

@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class UserController {
     @Autowired
-    private UserService userService;
+    private UserService userService = new UserService();
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
