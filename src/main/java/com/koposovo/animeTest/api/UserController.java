@@ -1,15 +1,19 @@
 package com.koposovo.animeTest.api;
 
 import com.koposovo.animeTest.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
-
+@Component
 public class UserController {
-    @Autowired
     private iJpa repo;
+
+    @Bean
+    public UserController getUserController() {
+        return new UserController();
+    }
 
     public List<User> findAll() {
         return repo.findAll();
@@ -19,8 +23,8 @@ public class UserController {
         repo.save(user);
     }
 
-    public Optional<User> findById(Long id) {
-        return repo.findById(id);
+    public User findById(Long id) {
+        return repo.findById(id).get();
     }
 
     public void deleteById(Long id) {

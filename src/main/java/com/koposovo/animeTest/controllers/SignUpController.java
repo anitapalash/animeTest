@@ -8,10 +8,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class SignUpController {
+    @Autowired
+    protected UserController userController;
+
     @FXML
     private TextField login_field;
 
@@ -38,7 +42,6 @@ public class SignUpController {
 
     @FXML
     void signUpNewUser(ActionEvent event) {
-        UserController userController = new UserController();
         String firstName= signUpName.getText();
         String lastName= signUpLastName.getText();
         String userName= login_field.getText();

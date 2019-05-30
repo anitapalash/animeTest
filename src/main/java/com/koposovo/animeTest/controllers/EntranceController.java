@@ -14,11 +14,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class EntranceController {
     protected static User user = new User();
+
+    @Autowired
+    protected UserController userController;
 
     @FXML
     private ResourceBundle resources;
@@ -64,10 +69,9 @@ public class EntranceController {
         user.setUserName(loginText);
         user.setPassword(loginPassword);
 
-        UserController userController = new UserController();
         Long i = Long.parseLong("1");
         while (true) {
-            User tempUser = userController.findById(i).get();
+            User tempUser = userController.findById(i);
             if (tempUser.getUserName().equals(user.getUserName())) {
                 if (tempUser.getPassword().equals(user.getPassword())) {
                     System.out.println("Log in successful");
