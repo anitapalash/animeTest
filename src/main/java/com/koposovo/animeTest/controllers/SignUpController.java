@@ -4,11 +4,11 @@ import com.koposovo.animeTest.SpringStageLoader;
 import com.koposovo.animeTest.api.UserController;
 import com.koposovo.animeTest.model.User;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
@@ -65,20 +65,16 @@ public class SignUpController {
         user.setLastName(lastName);
         user.setGroup(group);
         user.setGender(gender);
-
         try {
             userController.createUser(user);
             System.out.println("Пользователь успешно добавлен в базу данных");
-            Stage currentStage = (Stage) signUpButton.getScene().getWindow();
-            //SpringStageLoader.loadScene("LogIn");
-            currentStage.close();
-        } /* catch (IOException e) {
-            System.out.println("Не получилось загрузить новую сцену");
-            e.printStackTrace();
-        }*/ catch (Exception e) {
-            System.out.println("Не получилось добавить пользователя в базу данных. Причина:");
-            e.printStackTrace();
+            Scene currentScene = signUpButton.getScene();
+            SpringStageLoader.loadMain();
+            currentScene.getWindow().hide();
+        } catch (IOException e) {
+            System.out.println("Не удалось загрузить сцену");
+        } catch (Exception e) {
+            System.out.println("Не удалось добавить пользователя в базу данных");
         }
-
     }
 }

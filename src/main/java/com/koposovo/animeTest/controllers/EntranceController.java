@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.koposovo.animeTest.Service.UserService;
 import com.koposovo.animeTest.SpringStageLoader;
 import com.koposovo.animeTest.api.Access;
+import com.koposovo.animeTest.api.UserController;
 import com.koposovo.animeTest.model.User;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -64,13 +65,14 @@ public class EntranceController {
     }
 
     private void loginUser(String loginText, String loginPassword) {
+        //каким-то образом зафиксировать какой юзер залогинился
         user.setUserName(loginText);
         user.setPassword(loginPassword);
 
-        UserService userService = new UserService();
-        Long i = 1L;
+        UserController userController = new UserController();
+        Long i = Long.parseLong("0");
         while (true) {
-            User tempUser = userService.getUser(i);
+            User tempUser = userController.getUser(i);
             if (tempUser.getUserName().equals(user.getUserName())) {
                 if (tempUser.getPassword().equals(user.getPassword())) {
                     System.out.println("Log in successful");
@@ -94,18 +96,17 @@ public class EntranceController {
         }
     }
 
-
     private void loadEnter() {
         try {
             UserInterfaceController.setCurrentUser(user);
-
-            if (user.getAccess() == Access.ADMIN) {
+            Scene currentScene = authSignButton.getScene();
+            currentScene.getWindow().hide();
+            if (user.getAccess() == Access.ADMIN)
                 SpringStageLoader.loadScene("AdminView");
-            } else if (user.getAccess() == Access.ANALISER) {
+            else if (user.getAccess() == Access.ANALISER)
                 SpringStageLoader.loadScene("AnaliserInterface");
-            } else {
+            else
                 SpringStageLoader.loadScene("UserView");
-            }
         } catch (IOException e) {
             System.out.println("Failed to load scene");
         }
