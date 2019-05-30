@@ -2,16 +2,13 @@ package com.koposovo.animeTest.controllers;
 
 import com.koposovo.animeTest.api.UserController;
 import com.koposovo.animeTest.user.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.springframework.stereotype.Controller;
-
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 @Controller
 public class SignUpController {
@@ -40,13 +37,7 @@ public class SignUpController {
     private CheckBox signUpCheckBoxFemale;
 
     @FXML
-    void initialize() {
-        signUpButton.setOnAction(event -> {
-            signUpNewUser();
-        });
-    }
-
-    private void signUpNewUser() {
+    void signUpNewUser(ActionEvent event) {
         UserController userController = new UserController();
         String firstName= signUpName.getText();
         String lastName= signUpLastName.getText();

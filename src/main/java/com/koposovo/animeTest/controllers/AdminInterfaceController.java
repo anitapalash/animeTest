@@ -7,7 +7,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import org.springframework.stereotype.Controller;
 
-@Controller
 public class AdminInterfaceController extends UserInterfaceController {
     @FXML
     private Tab manageUsersTab;
