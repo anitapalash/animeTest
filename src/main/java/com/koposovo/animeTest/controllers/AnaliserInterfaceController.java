@@ -1,8 +1,8 @@
 package com.koposovo.animeTest.controllers;
 
+import com.koposovo.animeTest.api.UserInterfaceController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
-import org.springframework.stereotype.Controller;
 
 public class AnaliserInterfaceController extends UserInterfaceController {
     @FXML

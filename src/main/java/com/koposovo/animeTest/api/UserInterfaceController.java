@@ -1,4 +1,4 @@
-package com.koposovo.animeTest.controllers;
+package com.koposovo.animeTest.api;
 
 import com.koposovo.animeTest.user.User;
 import javafx.event.ActionEvent;

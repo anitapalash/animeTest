@@ -1,11 +1,11 @@
 package com.koposovo.animeTest.controllers;
 
+import com.koposovo.animeTest.api.UserInterfaceController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
-import org.springframework.stereotype.Controller;
 
 public class AdminInterfaceController extends UserInterfaceController {
     @FXML
