@@ -15,10 +15,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
-@Controller
+@Component
 public class EntranceController {
     protected static User user = new User();
 
@@ -69,7 +68,7 @@ public class EntranceController {
         user.setUserName(loginText);
         user.setPassword(loginPassword);
 
-        Long i = Long.parseLong("1");
+        Long i = Long.parseLong("0");
         while (true) {
             User tempUser = userController.findById(i);
             if (tempUser.getUserName().equals(user.getUserName())) {

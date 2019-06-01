@@ -1,19 +1,17 @@
 package com.koposovo.animeTest.api;
 
 import com.koposovo.animeTest.user.User;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Repository
 public class UserController {
+    @Autowired
     private iJpa repo;
 
-    @Bean
-    public UserController getUserController() {
-        return new UserController();
-    }
 
     public List<User> findAll() {
         return repo.findAll();
